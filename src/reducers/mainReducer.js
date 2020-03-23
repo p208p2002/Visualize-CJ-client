@@ -2,8 +2,14 @@
 let axios = require('axios');
 axios = axios.create({
     baseURL: 'http://140.120.13.252:12001',
-    // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 });
+
+export function setAppLoading(isLoading){
+    return{
+        type:"SET_APP_LOADING",
+        isLoading
+    }
+}
 
 export function parseCJ(CJText='',FoucsPositions=[]) {
     // return (dispatch) => {
@@ -21,6 +27,16 @@ export function parseCJ(CJText='',FoucsPositions=[]) {
     //     })
     // }
     return (dispatch) => {
+        // clear data
+        dispatch({
+            type:'PARSE_CJ_RESULT',
+            CJDefendants:[],
+            CJTokens:[],
+            CJMarks:[]
+        })
+
+        // in loading
+        dispatch(setAppLoading(true))
         axios.post('/parse-defendant',{
             CJText,
             FoucsPositions
@@ -36,18 +52,26 @@ export function parseCJ(CJText='',FoucsPositions=[]) {
                 CJMarks:marks
             })
         })
+        .finally(()=>{
+            dispatch(setAppLoading(false))
+        })
     }
 }
 
 let initState = {
     CJDefendants:[],
     CJTokens:[],
-    CJMarks:[]
+    CJMarks:[],
+    isLoading:false
 }
 
 export default function mainReducer(state = initState, action) {
     console.log(action)
     switch (action.type) {
+        case 'SET_APP_LOADING':
+            return Object.assign({},state,{
+                isLoading:action.isLoading
+            })
         case 'PARSE_CJ_RESULT':
             return Object.assign({},state,{
                 CJDefendants:action.CJDefendants,
