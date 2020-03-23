@@ -32,15 +32,19 @@ class markDocument extends Component {
                 mark = mark.split(",")
                 let name = mark[0]
                 let color = defendants.filter((defendant) => {
-                    console.log(defendant)
                     return name === defendant.name
                 })[0].color
                 let level = mark[1]
                 return (
-                    <mark className={`tag-${color}-${level}`} data-tip={name}>{token}</mark>
+                    <mark key={index} className={`tag-${color}-${level}`} data-tip={name}>{token}</mark>
                 )
             }
-            return <React.Fragment>{token}</React.Fragment>
+            var re = new RegExp('[：。]$');
+            // console.log(token.match(re))
+            if(token.match(re) !== null)
+                return <React.Fragment key={index}>{token}<br/></React.Fragment>
+            else
+                return <React.Fragment key={index}>{token}</React.Fragment>
         })
         return {
             context: tokens,
@@ -54,9 +58,9 @@ class markDocument extends Component {
         return (
             <div>
                 <div>
-                    {defendantsWithColor.map((defendant) => {
+                    {defendantsWithColor.map((defendant,index) => {
                         return (
-                            <p className={`tag-${defendant.color}-1`}>{defendant.name}</p>
+                            <p key={index} className={`tag-${defendant.color}-1`}>{defendant.name}</p>
                         )
                     })}
                 </div>
