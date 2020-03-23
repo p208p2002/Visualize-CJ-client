@@ -5,13 +5,18 @@ import { parseCJ } from '../../reducers/mainReducer'
 class index extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            context:''
+        };
     }
 
     submit = (e)=>{
         e.preventDefault()
         let { dispatch } = this.props
-        dispatch(parseCJ())
+        let { context } = this.state
+        let foucsPositions = ["校長","負責人"]
+        // console.log(context,foucsPositions)
+        dispatch(parseCJ(context,foucsPositions))
         // console.log('onClick')
     }
 
@@ -22,6 +27,11 @@ class index extends Component {
                     <div className="form-group">
                         <label>Example textarea</label>
                         <textarea
+                            onChange={(e)=>{
+                                this.setState({
+                                    context:e.target.value
+                                })
+                            }}
                             placeholder="請將判決書貼於此" 
                             className="form-control" 
                             id="exampleFormControlTextarea1"
