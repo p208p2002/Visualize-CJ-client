@@ -15,10 +15,10 @@ class markDocument extends Component {
         let availableColors = ['red', 'yellow', 'blue']
         return defendants.map((defendant, index) => {
             if (index < availableColors.length) {
-                return { name: defendant, color: availableColors[index] }
+                return { name: defendant.name, candicate_positions: defendant.candicate_positions, color: availableColors[index] }
             }
             else {
-                return { name: defendant, color: availableColors[availableColors.length - 1] }
+                return { name: defendant.name, candicate_positions: defendant.candicate_positions, color: availableColors[availableColors.length - 1] }
             }
         })
     }
@@ -41,8 +41,8 @@ class markDocument extends Component {
             }
             var re = new RegExp('[：。]$');
             // console.log(token.match(re))
-            if(token.match(re) !== null)
-                return <React.Fragment key={index}>{token}<br/></React.Fragment>
+            if (token.match(re) !== null)
+                return <React.Fragment key={index}>{token}<br /></React.Fragment>
             else
                 return <React.Fragment key={index}>{token}</React.Fragment>
         })
@@ -57,10 +57,27 @@ class markDocument extends Component {
         let { context, defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
             <div>
-                <div>
-                    {defendantsWithColor.map((defendant,index) => {
+                <div className="row">
+                    {defendantsWithColor.map((defendant, index) => {
                         return (
-                            <p key={index} className={`tag-${defendant.color}-1`}>{defendant.name}</p>
+                            <div key={index}className="col-4">
+                                <div className={`card border-${defendant.color}`}>
+                                    <div className="card-header">被告</div>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{defendant.name}</h5>
+                                        <h6>候選身份</h6>
+                                        <ul>
+                                            {defendant.candicate_positions.map((positions,p_index)=>{
+                                                return(
+                                                <li key={p_index} style={{listStyle:'decimal'}}>
+                                                    {positions[0].substring(0, 15)}
+                                                </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

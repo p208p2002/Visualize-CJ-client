@@ -1,4 +1,7 @@
 /* red */
+.border-red{
+    border-color: #FF3232 !important;
+}
 .tag-red-1{
     background-color: #FF3232;
 }
@@ -16,6 +19,9 @@
 }
 
 /* yellow */
+.border-yellow{
+    border-color: #ffd632 !important;
+}
 .tag-yellow-1{
     background-color: #ffd632;
 }
@@ -33,6 +39,9 @@
 }
 
 /* blue */
+.border-blue{
+    border-color: #004bcc !important;
+}
 .tag-blue-1{
     background-color: #004bcc;
     color: white;
