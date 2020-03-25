@@ -12,7 +12,7 @@ class markDocument extends Component {
 
     assignDefendantsColor = (defendants) => {
         // [name, color]
-        let availableColors = ['red', 'yellow', 'blue']
+        let availableColors = ['red', 'yellow', 'blue', 'gray']
         return defendants.map((defendant, index) => {
             if (index < availableColors.length) {
                 return { name: defendant.name, candicate_positions: defendant.candicate_positions, color: availableColors[index] }
