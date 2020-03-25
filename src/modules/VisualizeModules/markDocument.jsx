@@ -8,17 +8,17 @@ class markDocument extends Component {
         this.markRefs = []
     }
 
-    stringEncode = (str)=> {
+    stringEncode = (str) => {
         return btoa(unescape(encodeURIComponent(str)))
     }
 
-    scrollToRef = (tag)=> {
-        for(var i=0;i<this.markRefs.length;i++){
+    scrollToRef = (tag) => {
+        for (var i = 0; i < this.markRefs.length; i++) {
             let refObj = this.markRefs[i],
-            {name,ref} = refObj
-            if(name === tag){
+                { name, ref } = refObj
+            if (name === tag) {
                 console.log(refObj)
-                console.log(name,tag,name===tag)
+                console.log(name, tag, name === tag)
                 window.scrollTo(0, ref.current.offsetTop)
                 break
             }
@@ -68,14 +68,14 @@ class markDocument extends Component {
                 let level = mark[1]
                 // 反回帶有高亮的token
                 const newRef = React.createRef()
-                console.log('newRef',newRef)
+                console.log('newRef', newRef)
                 self.markRefs.push({
-                    'name':`${name}-${token}`,
-                    'ref':newRef
+                    'name': `${name}-${token}`,
+                    'ref': newRef
                 })
                 return (
                     <mark
-                        ref = {newRef}
+                        ref={newRef}
                         style={{
                             backgroundColor: `rgba(${color},${convertLevelToAlpha(level)})`
                         }}
@@ -104,7 +104,10 @@ class markDocument extends Component {
                 <div className="row">
                     {defendantsWithColor.map((defendant, index) => {
                         return (
-                            <div key={index} className="col-4">
+                            <div key={index}
+                                className="col-4"
+                                style={{ padding: 5 }}
+                            >
                                 <div
                                     className="card"
                                     style={{
@@ -121,7 +124,7 @@ class markDocument extends Component {
                                                     <li key={p_index} style={{ listStyle: 'decimal' }}>
                                                         <button
                                                             className="btn btn-sm position-link"
-                                                            onClick={()=>{
+                                                            onClick={() => {
                                                                 this.scrollToRef(`${defendant.name}-${positions[0].substring(0, 1)}`)
                                                             }}>{positions[0].substring(0, 15)}</button>
                                                     </li>
