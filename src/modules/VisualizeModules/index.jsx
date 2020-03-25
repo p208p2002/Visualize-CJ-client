@@ -9,14 +9,15 @@ class index extends Component {
     }
     render() {
         console.log(this.props.state)
-        let { CJDefendants, CJTokens, CJMarks } = this.props.state
+        let { CJDefendants, CJTokens, CJMarks, isLoading } = this.props.state
         return (
             <div id="VisualizeCJ">
-                <MarkDocument
-                    defendants = {CJDefendants}
-                    tokens = {CJTokens}
-                    marks = {CJMarks}
-                />
+                {isLoading ? <React.Fragment></React.Fragment>:
+                    <MarkDocument
+                        defendants={CJDefendants}
+                        tokens={CJTokens}
+                        marks={CJMarks}
+                    />}
             </div>
         );
     }

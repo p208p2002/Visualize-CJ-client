@@ -5,6 +5,24 @@ class markDocument extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.markRefs = []
+    }
+
+    stringEncode = (str)=> {
+        return btoa(unescape(encodeURIComponent(str)))
+    }
+
+    scrollToRef = (tag)=> {
+        for(var i=0;i<this.markRefs.length;i++){
+            let refObj = this.markRefs[i],
+            {name,ref} = refObj
+            if(name === tag){
+                console.log(refObj)
+                console.log(name,tag,name===tag)
+                window.scrollTo(0, ref.current.offsetTop)
+                break
+            }
+        }
     }
 
     assignDefendantsColor = (defendants) => {
@@ -22,6 +40,7 @@ class markDocument extends Component {
     }
 
     highlight = (defendants, tokens, marks) => {
+        console.log(this.markRefs)
         // 轉換level到對應的顏色深淺(alpha)
         let levelMapAlpha = []
         for (var i = 100; i > 0; i -= 10) {
@@ -37,6 +56,7 @@ class markDocument extends Component {
         console.log(defendants)
 
         //
+        let self = this
         tokens = tokens.map((token, index) => {
             let mark = marks[index]
             if (mark !== '') {
@@ -47,9 +67,15 @@ class markDocument extends Component {
                 })[0].color
                 let level = mark[1]
                 // 反回帶有高亮的token
+                const newRef = React.createRef()
+                console.log('newRef',newRef)
+                self.markRefs.push({
+                    'name':`${name}-${token}`,
+                    'ref':newRef
+                })
                 return (
                     <mark
-                        id={`${name}-${token}`}
+                        ref = {newRef}
                         style={{
                             backgroundColor: `rgba(${color},${convertLevelToAlpha(level)})`
                         }}
@@ -72,9 +98,9 @@ class markDocument extends Component {
 
     render() {
         let { defendants, tokens, marks } = this.props
-        let { context, defendantsWithColor } = this.highlight(defendants, tokens, marks)
+        let { context = [], defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
-            <div>
+            <div key={context.length.toString()}>
                 <div className="row">
                     {defendantsWithColor.map((defendant, index) => {
                         return (
@@ -93,7 +119,11 @@ class markDocument extends Component {
                                             {defendant.candicate_positions.map((positions, p_index) => {
                                                 return (
                                                     <li key={p_index} style={{ listStyle: 'decimal' }}>
-                                                        <a href={`#${defendant.name}-${positions[0].substring(0, 1)}`}>{positions[0].substring(0, 15)}</a>
+                                                        <button
+                                                            className="btn btn-sm position-link"
+                                                            onClick={()=>{
+                                                                this.scrollToRef(`${defendant.name}-${positions[0].substring(0, 1)}`)
+                                                            }}>{positions[0].substring(0, 15)}</button>
                                                     </li>
                                                 )
                                             })}
