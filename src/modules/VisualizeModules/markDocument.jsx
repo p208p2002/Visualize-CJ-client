@@ -10,7 +10,7 @@ class markDocument extends Component {
     assignDefendantsColor = (defendants) => {
         // 分配顏色給每一個被告
         // [name, color]
-        let availableColors = ['255,0,0', '255,255,0', '0,0,255', '0,0,0']
+        let availableColors = ['0, 155, 119', '42, 75, 124', '225, 93, 68', '239, 192, 80', '85, 180, 176', '224, 129, 25', '130, 46, 214', '214, 156, 47']
         return defendants.map((defendant, index) => {
             if (index < availableColors.length) {
                 return { name: defendant.name, candicate_positions: defendant.candicate_positions, color: availableColors[index] }
