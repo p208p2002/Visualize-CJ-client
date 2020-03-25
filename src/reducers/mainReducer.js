@@ -12,36 +12,8 @@ export function setAppLoading(isLoading){
 }
 
 export function parseCJ(CJText='',FoucsPositions=[]) {
-    // return (dispatch) => {
-    //     axios.post('/parse-defendant-example')
-    //     .then((res)=>{
-    //         // console.log(res)
-    //         let {data={}} = res,
-    //         {defendants=[], tokens=[], marks=[]}= data;
-    //         dispatch({
-    //             type:'PARSE_CJ_RESULT',
-    //             CJDefendants:defendants,
-    //             CJTokens:tokens,
-    //             CJMarks:marks
-    //         })
-    //     })
-    // }
-
     return (dispatch) => {
-        // clear data
-        dispatch({
-            type:'PARSE_CJ_RESULT',
-            CJDefendants:[],
-            CJTokens:[],
-            CJMarks:[]
-        })
-
-        // in loading
-        dispatch(setAppLoading(true))
-        axios.post('/parse-defendant',{
-            CJText,
-            FoucsPositions
-        })
+        axios.post('/parse-defendant-example')
         .then((res)=>{
             // console.log(res)
             let {data={}} = res,
@@ -53,10 +25,38 @@ export function parseCJ(CJText='',FoucsPositions=[]) {
                 CJMarks:marks
             })
         })
-        .finally(()=>{
-            dispatch(setAppLoading(false))
-        })
     }
+
+    // return (dispatch) => {
+    //     // clear data
+    //     dispatch({
+    //         type:'PARSE_CJ_RESULT',
+    //         CJDefendants:[],
+    //         CJTokens:[],
+    //         CJMarks:[]
+    //     })
+
+    //     // in loading
+    //     dispatch(setAppLoading(true))
+    //     axios.post('/parse-defendant',{
+    //         CJText,
+    //         FoucsPositions
+    //     })
+    //     .then((res)=>{
+    //         // console.log(res)
+    //         let {data={}} = res,
+    //         {defendants=[], tokens=[], marks=[]}= data;
+    //         dispatch({
+    //             type:'PARSE_CJ_RESULT',
+    //             CJDefendants:defendants,
+    //             CJTokens:tokens,
+    //             CJMarks:marks
+    //         })
+    //     })
+    //     .finally(()=>{
+    //         dispatch(setAppLoading(false))
+    //     })
+    // }
 }
 
 let initState = {
