@@ -49,6 +49,7 @@ class markDocument extends Component {
                 // 反回帶有高亮的token
                 return (
                     <mark
+                        id={`${name}-${token}`}
                         style={{
                             backgroundColor: `rgba(${color},${convertLevelToAlpha(level)})`
                         }}
@@ -92,7 +93,7 @@ class markDocument extends Component {
                                             {defendant.candicate_positions.map((positions, p_index) => {
                                                 return (
                                                     <li key={p_index} style={{ listStyle: 'decimal' }}>
-                                                        {positions[0].substring(0, 15)}
+                                                        <a href={`#${defendant.name}-${positions[0].substring(0, 1)}`}>{positions[0].substring(0, 15)}</a>
                                                     </li>
                                                 )
                                             })}
