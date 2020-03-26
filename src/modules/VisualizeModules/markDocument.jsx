@@ -42,6 +42,8 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
     )
 }
 
+const INFO_BOARD_HEIGHT = 300
+
 class markDocument extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +62,7 @@ class markDocument extends Component {
             if (name === tag) {
                 console.log(refObj)
                 console.log(name, tag, name === tag)
-                window.scrollTo(0, ref.current.offsetTop)
+                window.scrollTo(0, ref.current.offsetTop-INFO_BOARD_HEIGHT)
                 break
             }
         }
@@ -154,7 +156,7 @@ class markDocument extends Component {
                                 left: 0,
                                 width: '100%',
                                 backgroundColor: 'white',
-                                height: '300px',
+                                height: INFO_BOARD_HEIGHT.toString()+'px',
                                 overflowX: 'hidden',
                                 overflowY: 'visible'
                             }}>

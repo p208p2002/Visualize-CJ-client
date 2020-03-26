@@ -16,6 +16,11 @@ class App extends Component {
         <a href="https://law.judicial.gov.tw/default.aspx">法學判決書檢索系統</a>
         <CJInput />
         <VisualizeCJ />
+        <footer className="text-center" style={{
+          height:'300px'
+        }}>
+          {/* UDIC LAB */}
+        </footer>
       </div>
     );
   }
