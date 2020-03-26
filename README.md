@@ -1,4 +1,4 @@
-## env
+## 配置環境
 `cp example.env .env`
 ```.env
 REACT_APP_API_HOST=http://...
