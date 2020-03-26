@@ -1,5 +1,47 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
+import TrackVisibility from 'react-on-screen';
+
+const DefendantsCard = ({ self,defendantsWithColor }) => {
+    return (
+        <div className="row">
+            {defendantsWithColor.map((defendant, index) => {
+                return (
+                    <div key={index}
+                        className="col-4"
+                        style={{ padding: 5 }}
+                    >
+                        <div
+                            className="card"
+                            style={{
+                                borderColor: `rgb(${defendant.color})`
+                            }}
+                        >
+                            <div className="card-header">被告</div>
+                            <div className="card-body">
+                                <h5 className="card-title">{defendant.name}</h5>
+                                <h6>候選身份</h6>
+                                <ul>
+                                    {defendant.candicate_positions.map((positions, p_index) => {
+                                        return (
+                                            <li key={p_index} style={{ listStyle: 'decimal' }}>
+                                                <button
+                                                    className="btn btn-sm position-link"
+                                                    onClick={() => {
+                                                        self.scrollToRef(`${defendant.name}-${positions[0].substring(0, 1)}`)
+                                                    }}>{positions[0].substring(0, 15)}</button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
 
 class markDocument extends Component {
     constructor(props) {
@@ -101,42 +143,24 @@ class markDocument extends Component {
         let { context = [], defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
             <div key={context.length.toString()}>
-                <div className="row">
-                    {defendantsWithColor.map((defendant, index) => {
-                        return (
-                            <div key={index}
-                                className="col-4"
-                                style={{ padding: 5 }}
-                            >
-                                <div
-                                    className="card"
-                                    style={{
-                                        borderColor: `rgb(${defendant.color})`
-                                    }}
-                                >
-                                    <div className="card-header">被告</div>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{defendant.name}</h5>
-                                        <h6>候選身份</h6>
-                                        <ul>
-                                            {defendant.candicate_positions.map((positions, p_index) => {
-                                                return (
-                                                    <li key={p_index} style={{ listStyle: 'decimal' }}>
-                                                        <button
-                                                            className="btn btn-sm position-link"
-                                                            onClick={() => {
-                                                                this.scrollToRef(`${defendant.name}-${positions[0].substring(0, 1)}`)
-                                                            }}>{positions[0].substring(0, 15)}</button>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
+                <TrackVisibility>
+                    {({ isVisible }) => isVisible ? <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} /> :
+                        <div>
+                            <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
+                            <div style={{
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                backgroundColor:'white'
+                            }}>
+                                <div className="container">
+                                    <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
                                 </div>
                             </div>
-                        )
-                    })}
-                </div>
+                        </div>
+                    }
+                </TrackVisibility>
                 <div>
                     {context}
                 </div>
