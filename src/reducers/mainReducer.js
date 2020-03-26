@@ -1,7 +1,7 @@
 
 let axios = require('axios');
 axios = axios.create({
-    baseURL: 'http://140.120.13.252:12001',
+    baseURL: process.env.REACT_APP_API_HOST,
 });
 
 export function setAppLoading(isLoading){

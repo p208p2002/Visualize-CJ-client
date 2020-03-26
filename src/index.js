@@ -8,6 +8,12 @@ import mainReducer from './reducers/mainReducer'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
+require('dotenv').config()
+console.log(process.env)
+
+if(typeof process.env.REACT_APP_API_HOST === 'undefined'){
+    console.warn('process.env.REACT_APP_API_HOST undefined')
+}
 
 const store = createStore(mainReducer, applyMiddleware(thunk))
 
