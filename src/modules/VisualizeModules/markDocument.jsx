@@ -8,7 +8,7 @@ const DefendantsCard = ({ self,defendantsWithColor }) => {
             {defendantsWithColor.map((defendant, index) => {
                 return (
                     <div key={index}
-                        className="col-4"
+                        className="col-12"
                         style={{ padding: 5 }}
                     >
                         <div
@@ -17,9 +17,8 @@ const DefendantsCard = ({ self,defendantsWithColor }) => {
                                 borderColor: `rgb(${defendant.color})`
                             }}
                         >
-                            <div className="card-header">被告</div>
                             <div className="card-body">
-                                <h5 className="card-title">{defendant.name}</h5>
+                                <h5 className="card-title">{defendant.name}(被告)</h5>
                                 <h6>候選身份</h6>
                                 <ul>
                                     {defendant.candicate_positions.map((positions, p_index) => {
@@ -143,7 +142,7 @@ class markDocument extends Component {
         let { context = [], defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
             <div key={context.length.toString()}>
-                <TrackVisibility>
+                <TrackVisibility offset={100}>
                     {({ isVisible }) => isVisible ? <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} /> :
                         <div>
                             <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
@@ -152,7 +151,10 @@ class markDocument extends Component {
                                 top: 0,
                                 left: 0,
                                 width: '100%',
-                                backgroundColor:'white'
+                                backgroundColor:'white',
+                                height:'300px',
+                                overflowX: 'hidden',
+                                overflowY: 'visible'
                             }}>
                                 <div className="container">
                                     <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
