@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
 import TrackVisibility from 'react-on-screen';
 
-const DefendantsCard = ({ self,defendantsWithColor }) => {
+const DefendantsCard = ({ self, defendantsWithColor }) => {
     return (
         <div className="row">
             {defendantsWithColor.map((defendant, index) => {
                 return (
                     <div key={index}
-                        className="col-12"
+                        className="col-4"
                         style={{ padding: 5 }}
                     >
                         <div
@@ -142,8 +142,10 @@ class markDocument extends Component {
         let { context = [], defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
             <div key={context.length.toString()}>
-                <TrackVisibility offset={100}>
-                    {({ isVisible }) => isVisible ? <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} /> :
+                <TrackVisibility offset={defendants.length > 3 ? 280 : 0}>
+                    {({ isVisible }) => isVisible ?
+                        <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
+                        :
                         <div>
                             <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
                             <div style={{
@@ -151,8 +153,8 @@ class markDocument extends Component {
                                 top: 0,
                                 left: 0,
                                 width: '100%',
-                                backgroundColor:'white',
-                                height:'300px',
+                                backgroundColor: 'white',
+                                height: '300px',
                                 overflowX: 'hidden',
                                 overflowY: 'visible'
                             }}>
