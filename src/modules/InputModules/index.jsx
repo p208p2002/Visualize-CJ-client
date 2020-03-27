@@ -7,8 +7,19 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            context: ''
+            context: '',
+            foucsPositions:[]
         };
+    }
+
+    componentDidMount(){
+        axios.get(require('../../assets/position_list.txt'))
+        .then((res)=>{
+            let foucsPositions = res.data.split("\n")
+            this.setState({
+                foucsPositions
+            })
+        })
     }
 
     loadExample = (fileName)=>{
@@ -24,9 +35,9 @@ class index extends Component {
     submit = (e) => {
         e.preventDefault()
         let { dispatch } = this.props
-        let { context } = this.state
-        let foucsPositions = ["校長", "負責人"]
-        // console.log(context,foucsPositions)
+        let { context,foucsPositions } = this.state
+        // let foucsPositions = ["校長", "負責人"]
+        console.log(context,foucsPositions)
         dispatch(parseCJ(context, foucsPositions))
         // console.log('onClick')
     }
