@@ -8,4 +8,4 @@ build in docker
 
 `$ npm run docker-build`
 ### run
-`$ docker run -itd -p XXXX:3000 visualize_cj`
+`$ docker run -itd -p XXXX:3000 vcj_client`

@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build&&rm -rf react-deploy-server/public&&mv build react-deploy-server/public",
-    "docker-build": "docker build -t=visualize_cj .",
+    "docker-build": "docker build -t=vcj_client .",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
