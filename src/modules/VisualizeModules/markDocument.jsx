@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
-import TrackVisibility from 'react-on-screen';
 
 const DefendantsCard = ({ self, defendantsWithColor }) => {
     return (
@@ -47,8 +46,34 @@ const INFO_BOARD_HEIGHT = 300
 class markDocument extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            fixedDefendantsCard: false
+        };
         this.markRefs = []
+        this.DefendantsCardRef = React.createRef()
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll)
+    }
+
+    componentWillMount() {
+        window.removeEventListener('scroll', this.handleScroll)
+    }
+
+    handleScroll = () => {
+        var rect = this.DefendantsCardRef.current.getBoundingClientRect();
+        let { fixedDefendantsCard } = this.state
+        if (rect.top < 0) {
+            this.setState({
+                fixedDefendantsCard: true
+            })
+        }
+        else if (fixedDefendantsCard === true && rect.top >= 0) {
+            this.setState({
+                fixedDefendantsCard: false
+            })
+        }
     }
 
     stringEncode = (str) => {
@@ -62,7 +87,7 @@ class markDocument extends Component {
             if (name === tag) {
                 console.log(refObj)
                 console.log(name, tag, name === tag)
-                window.scrollTo(0, ref.current.offsetTop-INFO_BOARD_HEIGHT)
+                window.scrollTo(0, ref.current.offsetTop - INFO_BOARD_HEIGHT)
                 break
             }
         }
@@ -83,7 +108,7 @@ class markDocument extends Component {
     }
 
     highlight = (defendants, tokens, marks) => {
-        console.log(this.markRefs)
+        this.markRefs = []
         // 轉換level到對應的顏色深淺(alpha)
         let levelMapAlpha = []
         for (var i = 100; i > 0; i -= 10) {
@@ -111,7 +136,7 @@ class markDocument extends Component {
                 let level = mark[1]
                 // 反回帶有高亮的token
                 const newRef = React.createRef()
-                console.log('newRef', newRef)
+                // console.log('newRef', newRef)
                 self.markRefs.push({
                     'name': `${name}-${token}`,
                     'ref': newRef
@@ -141,32 +166,37 @@ class markDocument extends Component {
 
     render() {
         let { defendants, tokens, marks } = this.props
+        let { fixedDefendantsCard } = this.state
         let { context = [], defendantsWithColor } = this.highlight(defendants, tokens, marks)
         return (
-            <div key={context.length.toString()}>
-                <TrackVisibility offset={defendants.length > 3 ? 280 : 0}>
-                    {({ isVisible }) => isVisible ?
-                        <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
-                        :
-                        <div>
-                            <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
-                            <div style={{
-                                position: 'fixed',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                backgroundColor: 'white',
-                                height: INFO_BOARD_HEIGHT.toString()+'px',
-                                overflowX: 'hidden',
-                                overflowY: 'visible'
-                            }}>
-                                <div className="container">
-                                    <DefendantsCard self={this} defendantsWithColor={defendantsWithColor} />
-                                </div>
+            <div>
+                <div
+                    ref={this.DefendantsCardRef}
+                    className="container">
+                    <DefendantsCard
+                        key={fixedDefendantsCard.toString()}
+                        self={this}
+                        defendantsWithColor={defendantsWithColor} />
+                </div>
+                {fixedDefendantsCard ?
+                    <div className="container">
+                        <div style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            backgroundColor: 'white',
+                            height: INFO_BOARD_HEIGHT.toString() + 'px',
+                            overflowX: 'hidden',
+                            overflowY: 'visible'
+                        }}>
+                            <div className="container">
+                                <DefendantsCard
+                                    key={fixedDefendantsCard.toString()}
+                                    self={this} defendantsWithColor={defendantsWithColor} />
                             </div>
                         </div>
-                    }
-                </TrackVisibility>
+                    </div> : null}
                 <div>
                     {context}
                 </div>
