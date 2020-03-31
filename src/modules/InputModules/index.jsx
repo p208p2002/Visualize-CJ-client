@@ -55,21 +55,21 @@ class index extends Component {
                             }}
                         >輸入範例1</div>
                         &nbsp;
-                        <div 
+                        {/* <div 
                         className="btn btn-sm btn-success"
                         onClick={() => {
                             this.loadExample('2.txt')
                             
                         }}
                         >輸入範例2</div>
-                        &nbsp;
-                        <div 
+                        &nbsp; */}
+                        {/* <div 
                         className="btn btn-sm btn-success"
                         onClick={() => {
                             this.loadExample('3.txt')
                             
                         }}
-                        >輸入範例3</div>
+                        >輸入範例3</div> */}
                         <textarea
                             onChange={(e) => {
                                 this.setState({
