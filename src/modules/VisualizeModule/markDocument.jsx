@@ -202,13 +202,23 @@ class markDocument extends Component {
                                     left: 0,
                                     color: '#FBFCFF',
                                     height: 24,
-                                    paddingLeft:15,
+                                    paddingLeft: 15,
                                 }}>
                                     <span>Visualize CJ</span>
-                                    <span className="float-right" style={{marginRight:15}}>UDIC LAB</span>
+                                    <div className="text-center" style={{
+                                        marginTop:-24
+                                    }}>
+                                        <span onClick={()=>{
+                                            window.scrollTo({
+                                                top: 0,
+                                                behavior: "smooth"
+                                            });
+                                        }} style={{cursor:'pointer'}}>回到上方</span>
+                                    </div>
+                                    <span className="float-right" style={{ marginRight: 15,marginTop:-24 }}>UDIC LAB</span>
                                 </div>
                                 <div>
-                                    <br/>
+                                    <br />
                                     <DefendantsCard
                                         key={fixedDefendantsCard.toString()}
                                         self={this} defendantsWithColor={defendantsWithColor} />
