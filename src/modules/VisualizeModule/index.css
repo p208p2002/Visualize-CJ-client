@@ -1,0 +1,20 @@
+#VisualizeModule .position-link{
+    color: #404040;
+}
+
+#VisualizeModule .card{
+    height: 230px;
+}
+
+#VisualizeModule .card-body{
+    padding: 12px;
+}
+
+#VisualizeModule .card-body .btn-sm{
+    padding: 0px;
+}
+
+#VisualizeModule ul{
+    margin-bottom: 0;
+}
+

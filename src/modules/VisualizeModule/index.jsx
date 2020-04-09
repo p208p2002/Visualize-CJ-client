@@ -11,7 +11,7 @@ class index extends Component {
         console.log(this.props.state)
         let { CJDefendants, CJTokens, CJMarks, isLoading } = this.props.state
         return (
-            <div id="VisualizeCJ">
+            <div id="VisualizeModule">
                 {isLoading ? <React.Fragment></React.Fragment>:
                     <MarkDocument
                         defendants={CJDefendants}

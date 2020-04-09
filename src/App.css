@@ -1,0 +1,18 @@
+.vj-title{
+    /* float: left; */
+    background-color: #363F70;
+    color: #FBFCFF;
+    padding: 15px;
+    height: 65px;
+}
+
+.vj-title h1{
+    font-size: 28px;
+}
+
+.vj-title .float-right{
+    float: right;
+    height: 65px;
+    margin-top: -58px;
+    line-height: 65px;
+}

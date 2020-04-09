@@ -1,0 +1,11 @@
+#InputModule .btn-success {
+    color:#404040;
+    background-color: #F4B563 !important;
+    border-color: #ECEDF2 !important;
+}
+
+#InputModule .btn-danger {
+    color:white;
+    background-color: #FF6F59 !important;
+    border-color: #ECEDF2 !important;
+}

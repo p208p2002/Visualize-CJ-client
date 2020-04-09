@@ -7,13 +7,14 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
             {defendantsWithColor.map((defendant, index) => {
                 return (
                     <div key={index}
-                        className="col-4"
+                        className="col-md-4 col-12"
                         style={{ padding: 5 }}
                     >
                         <div
                             className="card"
                             style={{
-                                borderColor: `rgb(${defendant.color})`
+                                borderColor: `rgb(${defendant.color})`,
+                                borderWidth: 3
                             }}
                         >
                             <div className="card-body">
@@ -41,7 +42,7 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
     )
 }
 
-const INFO_BOARD_HEIGHT = 300
+const INFO_BOARD_HEIGHT = 270
 
 class markDocument extends Component {
     constructor(props) {
@@ -62,17 +63,21 @@ class markDocument extends Component {
     }
 
     handleScroll = () => {
-        var rect = this.DefendantsCardRef.current.getBoundingClientRect();
-        let { fixedDefendantsCard } = this.state
-        if (rect.top < 0) {
-            this.setState({
-                fixedDefendantsCard: true
-            })
-        }
-        else if (fixedDefendantsCard === true && rect.top >= 0) {
-            this.setState({
-                fixedDefendantsCard: false
-            })
+        try {
+            var rect = this.DefendantsCardRef.current.getBoundingClientRect();
+            let { fixedDefendantsCard } = this.state
+            if (rect.top < 0) {
+                this.setState({
+                    fixedDefendantsCard: true
+                })
+            }
+            else if (fixedDefendantsCard === true && rect.top >= 0) {
+                this.setState({
+                    fixedDefendantsCard: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -191,9 +196,23 @@ class markDocument extends Component {
                             overflowY: 'visible'
                         }}>
                             <div className="container">
-                                <DefendantsCard
-                                    key={fixedDefendantsCard.toString()}
-                                    self={this} defendantsWithColor={defendantsWithColor} />
+                                <div className="w-100" style={{
+                                    backgroundColor: '#363F70',
+                                    position: 'absolute',
+                                    left: 0,
+                                    color: '#FBFCFF',
+                                    height: 24,
+                                    paddingLeft:15,
+                                }}>
+                                    <span>Visualize CJ</span>
+                                    <span className="float-right" style={{marginRight:15}}>UDIC LAB</span>
+                                </div>
+                                <div>
+                                    <br/>
+                                    <DefendantsCard
+                                        key={fixedDefendantsCard.toString()}
+                                        self={this} defendantsWithColor={defendantsWithColor} />
+                                </div>
                             </div>
                         </div>
                     </div> : null}

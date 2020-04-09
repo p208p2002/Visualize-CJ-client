@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import CJInput from './modules/InputModules'
-import VisualizeCJ from './modules/VisualizeModules'
-import LoadingMask from './modules/loadingModules'
+import CJInput from './modules/InputModule'
+import VisualizeCJ from './modules/VisualizeModule'
+import LoadingMask from './modules/loadingModule'
+import Footer from './modules/FooterModule'
 import './App.css'
 class App extends Component {
   constructor(props) {
@@ -10,17 +11,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <LoadingMask/>
-        <h1>Visualize CJ</h1>
-        <a href="https://law.judicial.gov.tw/default.aspx">法學判決書檢索系統</a>
-        <CJInput />
-        <VisualizeCJ />
-        <footer className="text-center" style={{
-          height:'300px'
-        }}>
-          {/* UDIC LAB */}
-        </footer>
+      <div>
+        <div className="vj-title">
+          <h1>Visualize CJ</h1>
+          <span className="float-right">UDIC LAB</span>
+        </div>
+        <div className="container">
+          <LoadingMask />
+          <CJInput />
+          <VisualizeCJ />
+          <Footer/>
+        </div>
       </div>
     );
   }
