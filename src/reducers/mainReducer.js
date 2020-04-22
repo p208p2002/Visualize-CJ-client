@@ -12,7 +12,7 @@ export function setAppLoading(isLoading) {
 }
 
 export function parseCJ(CJText = '', FoucsPositions = []) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV !== 'development') {
         return (dispatch) => {
             axios.post('/parse-defendant-example')
                 .then((res) => {
