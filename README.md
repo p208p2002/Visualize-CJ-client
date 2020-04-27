@@ -1,5 +1,5 @@
-# V-CJ Client
-![Build](https://github.com/p208p2002/Visualize-CJ-client/workflows/Build/badge.svg?branch=master)
+# V-CJ Client ![Build](https://github.com/p208p2002/Visualize-CJ-client/workflows/Build/badge.svg?branch=master)
+main repo:[https://github.com/p208p2002/Visualize-CJ](https://github.com/p208p2002/Visualize-CJ)
 ### .env
 `$ cp example.env .env`
 ```.env
