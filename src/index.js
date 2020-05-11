@@ -18,8 +18,6 @@ if(typeof process.env.REACT_APP_API_HOST === 'undefined'){
 
 let rootReducer = combineReducers({MainReducer,VisualizeReducer})
 const store = createStore(rootReducer, applyMiddleware(thunk))
-console.log(rootReducer)
-console.log(store)
 
 ReactDOM.render(
     <Provider store={store}>

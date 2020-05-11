@@ -73,7 +73,7 @@ let initState = {
 }
 
 export default function mainReducer(state = initState, action) {
-    console.log(action)
+    console.log('MR',action)
     switch (action.type) {
         case 'SET_APP_LOADING':
             return Object.assign({}, state, {

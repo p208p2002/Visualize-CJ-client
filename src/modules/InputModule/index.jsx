@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { parseCJ } from '../../reducers/MainReducer'
+import { setVisualizeView } from '../../reducers/VisualizeReducer'
 import axios from 'axios'
 import './index.css'
 import { IoIosPaper } from "react-icons/io";
@@ -57,6 +58,7 @@ class index extends Component {
 
     render() {
         let { tab } = this.state
+        let { dispatch } = this.props
         return (
             <div id="InputModule">
                 <form style={{ marginTop: 5, marginBottom: 5 }}>
@@ -123,6 +125,7 @@ class index extends Component {
                         <li className="nav-item">
                             <span
                                 onClick={() => {
+                                    dispatch(setVisualizeView('PARSE_POSITION')) 
                                     this.setState({
                                         tab: 'PARSE_POSITION'
                                     })
@@ -132,28 +135,34 @@ class index extends Component {
                         <li className="nav-item">
                             <span
                                 onClick={() => {
+                                    dispatch(setVisualizeView('PARSE_BREAK_LAW')) 
                                     this.setState({
                                         tab: 'PARSE_BREAK_LAW'
                                     })
                                 }}
-                                className={`nav-link ${tab === 'PARSE_BREAK_LAW' ? 'active' : ''}`} >分析處犯法條</span>
+                                className={`nav-link ${tab === 'PARSE_BREAK_LAW' ? 'active' : ''}`} >分析觸犯法條</span>
                         </li>
                     </ul>
                     <br/>
                     {tab === 'PARSE_POSITION' ? <>
                         <button
-                            onClick={(e) => { e.preventDefault(); this.submit('PARSE_POSITION') }}
+                            onClick={(e) => { 
+                                e.preventDefault();
+                                this.submit('PARSE_POSITION') 
+                            }}
                             className="btn btn-primary">
                             分析職稱
                                 </button>
                     </> : <></>}
                     {tab === 'PARSE_BREAK_LAW' ? <>
                         <button
-                            onClick={(e) => { e.preventDefault(); this.submit('PARSE_BREAK_LAW') }}
+                            onClick={(e) => { 
+                                e.preventDefault(); 
+                                this.submit('PARSE_BREAK_LAW') }}
                             className="btn btn-primary"
                         // style={{ marginLeft: 3 }}
                         >
-                            分析處犯法條
+                            分析觸犯法條
                                 </button>
                     </> : <></>}
                 </form>
