@@ -9,3 +9,7 @@
     background-color: #FF6F59 !important;
     border-color: #ECEDF2 !important;
 }
+
+#InputModule li.nav-item{
+    cursor: pointer;
+}
