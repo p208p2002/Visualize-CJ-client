@@ -34,14 +34,24 @@ class index extends Component {
             })
     }
 
-    submit = (e) => {
-        e.preventDefault()
+    submit = (type) => {
         let { dispatch } = this.props
         let { context, foucsPositions } = this.state
-        // let foucsPositions = ["校長", "負責人"]
-        console.log(context, foucsPositions)
-        dispatch(parseCJ(context, foucsPositions))
-        // console.log('onClick')
+        
+        let searchParagraph = undefined
+        let question_A = undefined
+        let question_B = undefined
+        if(type === 'PARSE_POSITION'){
+            searchParagraph = '事實'
+            question_A = '[NAME]擔任什麼職位'
+            question_B = '誰擔任[TARGET]'
+        }
+        else if(type === 'PARSE_BREAK_LAW'){
+            searchParagraph = '論罪科刑'
+            question_A = '[NAME]觸犯什麼法條'
+            question_B = '誰觸犯[TARGET]'
+        }
+        dispatch(parseCJ(context, foucsPositions, searchParagraph, question_A ,question_B))
     }
 
     render() {
@@ -106,9 +116,14 @@ class index extends Component {
                             style={{ height: '300px', marginTop: 5 }}></textarea>
                     </div>
                     <button
-                        onClick={this.submit}
+                        onClick={(e)=>{e.preventDefault();this.submit('PARSE_POSITION')}}
                         className="btn btn-primary">
-                        Submit
+                        分析職稱
+                    </button>
+                    <button
+                        onClick={(e)=>{e.preventDefault();this.submit('PARSE_BREAK_LAW')}}
+                        className="btn btn-primary">
+                        分析處犯法條
                     </button>
                 </form>
                 <br />
