@@ -7,6 +7,7 @@ class index extends Component {
         super(props);
         this.state = {};
     }
+
     render() {
         console.log(this.props.state)
         let { CJDefendants, CJTokens, CJMarks, isLoading } = this.props.state
@@ -25,7 +26,7 @@ class index extends Component {
 
 let mapStateToProps = (state) => {
     return {
-        state
+        state:state.MainReducer
     }
 }
 

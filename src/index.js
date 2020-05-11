@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './assets/css/bootstrap.min.css'
-import mainReducer from './reducers/mainReducer'
+import MainReducer from './reducers/MainReducer.js'
+import VisualizeReducer from './reducers/VisualizeReducer.js'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk';
 require('dotenv').config()
 console.log(process.env)
@@ -15,7 +16,10 @@ if(typeof process.env.REACT_APP_API_HOST === 'undefined'){
     console.warn('process.env.REACT_APP_API_HOST undefined')
 }
 
-const store = createStore(mainReducer, applyMiddleware(thunk))
+let rootReducer = combineReducers({MainReducer,VisualizeReducer})
+const store = createStore(rootReducer, applyMiddleware(thunk))
+console.log(rootReducer)
+console.log(store)
 
 ReactDOM.render(
     <Provider store={store}>

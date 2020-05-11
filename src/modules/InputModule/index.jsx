@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { parseCJ } from '../../reducers/mainReducer'
+import { parseCJ } from '../../reducers/MainReducer'
 import axios from 'axios'
 import './index.css'
 import { IoIosPaper } from "react-icons/io";
@@ -52,7 +52,7 @@ class index extends Component {
             question_A = '[NAME]觸犯什麼法條'
             question_B = '誰觸犯[TARGET]'
         }
-        dispatch(parseCJ(context, foucsPositions, searchParagraph, question_A, question_B))
+        dispatch(parseCJ(context, type, foucsPositions, searchParagraph, question_A, question_B))
     }
 
     render() {

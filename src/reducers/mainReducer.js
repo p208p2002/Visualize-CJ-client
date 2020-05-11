@@ -11,7 +11,7 @@ export function setAppLoading(isLoading) {
     }
 }
 
-export function parseCJ(CJText = '', FoucsPositions = [], SearchParagraph, Question_A, Question_B) {
+export function parseCJ(CJText = '', taskType, FoucsPositions = [], SearchParagraph, Question_A, Question_B) {
     // if (process.env.NODE_ENV === 'development') {
     //     return (dispatch) => {
     //         axios.post('/parse-defendant-example')
@@ -34,7 +34,8 @@ export function parseCJ(CJText = '', FoucsPositions = [], SearchParagraph, Quest
             type: 'PARSE_CJ_RESULT',
             CJDefendants: [],
             CJTokens: [],
-            CJMarks: []
+            CJMarks: [],
+            taskType
         })
 
         // in loading
@@ -54,7 +55,8 @@ export function parseCJ(CJText = '', FoucsPositions = [], SearchParagraph, Quest
                     type: 'PARSE_CJ_RESULT',
                     CJDefendants: defendants,
                     CJTokens: tokens,
-                    CJMarks: marks
+                    CJMarks: marks,
+                    taskType
                 })
             })
             .finally(() => {
