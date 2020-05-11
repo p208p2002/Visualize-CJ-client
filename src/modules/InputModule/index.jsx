@@ -10,7 +10,8 @@ class index extends Component {
         super(props);
         this.state = {
             context: '',
-            foucsPositions: []
+            foucsPositions: [],
+            tab: 'PARSE_POSITION'
         };
     }
 
@@ -37,24 +38,25 @@ class index extends Component {
     submit = (type) => {
         let { dispatch } = this.props
         let { context, foucsPositions } = this.state
-        
+
         let searchParagraph = undefined
         let question_A = undefined
         let question_B = undefined
-        if(type === 'PARSE_POSITION'){
+        if (type === 'PARSE_POSITION') {
             searchParagraph = '事實'
             question_A = '[NAME]擔任什麼職位'
             question_B = '誰擔任[TARGET]'
         }
-        else if(type === 'PARSE_BREAK_LAW'){
+        else if (type === 'PARSE_BREAK_LAW') {
             searchParagraph = '論罪科刑'
             question_A = '[NAME]觸犯什麼法條'
             question_B = '誰觸犯[TARGET]'
         }
-        dispatch(parseCJ(context, foucsPositions, searchParagraph, question_A ,question_B))
+        dispatch(parseCJ(context, foucsPositions, searchParagraph, question_A, question_B))
     }
 
     render() {
+        let { tab } = this.state
         return (
             <div id="InputModule">
                 <form style={{ marginTop: 5, marginBottom: 5 }}>
@@ -115,16 +117,45 @@ class index extends Component {
                             id="exampleFormControlTextarea1"
                             style={{ height: '300px', marginTop: 5 }}></textarea>
                     </div>
-                    <button
-                        onClick={(e)=>{e.preventDefault();this.submit('PARSE_POSITION')}}
-                        className="btn btn-primary">
-                        分析職稱
-                    </button>
-                    <button
-                        onClick={(e)=>{e.preventDefault();this.submit('PARSE_BREAK_LAW')}}
-                        className="btn btn-primary">
-                        分析處犯法條
-                    </button>
+
+                    {/*  */}
+                    <ul className="nav nav-tabs">
+                        <li className="nav-item">
+                            <span
+                                onClick={() => {
+                                    this.setState({
+                                        tab: 'PARSE_POSITION'
+                                    })
+                                }}
+                                className={`nav-link ${tab === 'PARSE_POSITION' ? 'active' : ''}`} >分析職稱</span>
+                        </li>
+                        <li className="nav-item">
+                            <span
+                                onClick={() => {
+                                    this.setState({
+                                        tab: 'PARSE_BREAK_LAW'
+                                    })
+                                }}
+                                className={`nav-link ${tab === 'PARSE_BREAK_LAW' ? 'active' : ''}`} >分析處犯法條</span>
+                        </li>
+                    </ul>
+                    <br/>
+                    {tab === 'PARSE_POSITION' ? <>
+                        <button
+                            onClick={(e) => { e.preventDefault(); this.submit('PARSE_POSITION') }}
+                            className="btn btn-primary">
+                            分析職稱
+                                </button>
+                    </> : <></>}
+                    {tab === 'PARSE_BREAK_LAW' ? <>
+                        <button
+                            onClick={(e) => { e.preventDefault(); this.submit('PARSE_BREAK_LAW') }}
+                            className="btn btn-primary"
+                        // style={{ marginLeft: 3 }}
+                        >
+                            分析處犯法條
+                                </button>
+                    </> : <></>}
                 </form>
                 <br />
             </div>
