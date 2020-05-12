@@ -1,7 +1,15 @@
+import { setAppLoading } from './MainReducer'
+
 export function setVisualizeView(view){
-    return{
-        type:'VISUALIZE_SET_VIEW',
-        view
+    return(dispatch)=>{
+        dispatch(setAppLoading(true))
+        setTimeout(()=>{
+            dispatch({
+                type:'VISUALIZE_SET_VIEW',
+                view
+            })
+            dispatch(setAppLoading(false))
+        },0)
     }
 }
 
