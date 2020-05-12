@@ -126,7 +126,7 @@ class markDocument extends Component {
 
         // 分配顏色給每一個被告
         defendants = this.assignDefendantsColor(defendants)
-        console.log(defendants)
+        // console.log(defendants)
 
         //
         let self = this
