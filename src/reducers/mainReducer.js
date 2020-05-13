@@ -71,7 +71,7 @@ let initState = {
     isLoading: false
 }
 
-export default function mainReducer(state = initState, action) {
+export default function MainReducer(state = initState, action) {
     console.log('MR',action)
     switch (action.type) {
         case 'SET_APP_LOADING':
