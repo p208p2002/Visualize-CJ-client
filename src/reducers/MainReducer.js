@@ -4,7 +4,7 @@ let {
     REACT_APP_USER_AUTH_SERVER: UDIC_SERVICES_SERVER = '',
     REACT_APP_USER_AUTH = 'FALSE'
 } = process.env
-
+let axios;
 if(REACT_APP_USER_AUTH === 'FALSE'){ //不需要做登入認證
     axios = Axios.create({
         baseURL: REACT_APP_API_HOST,
@@ -30,7 +30,7 @@ export const getToken = (account, password, callbackOnFail = () => { }, callback
     
     return (dispatch) => {
         dispatch({
-            type: 'USER_LOGINING',
+            type: 'SET_APP_LOADING',
             loging: true
         })
         axios.post('/login', {
@@ -38,7 +38,6 @@ export const getToken = (account, password, callbackOnFail = () => { }, callback
             password
         })
             .then((res) => {
-                console.log(res.data)
                 let { Token = '' } = res.data
                 callbackOnSuccess()
                 window.localStorage.setItem('appToken', Token)
@@ -49,7 +48,7 @@ export const getToken = (account, password, callbackOnFail = () => { }, callback
                     token: Token
                 })
                 dispatch({
-                    type: 'USER_LOGINING',
+                    type: 'SET_APP_LOADING',
                     loging: false
                 })
             })
@@ -57,7 +56,7 @@ export const getToken = (account, password, callbackOnFail = () => { }, callback
                 console.log(res)
                 callbackOnFail()
                 dispatch({
-                    type: 'USER_LOGINING',
+                    type: 'SET_APP_LOADING',
                     loging: false
                 })
             })
@@ -113,12 +112,17 @@ let initState = {
     CJDefendants: [],
     CJTokens: [],
     CJMarks: [],
-    isLoading: false
+    isLoading: false,
+    token:window.localStorage.getItem('appToken')
 }
 
 export default function MainReducer(state = initState, action) {
     console.log('MR',action)
     switch (action.type) {
+        case 'USER_LOGIN':
+            return Object.assign({},state, {
+                token:action.token
+            })
         case 'SET_APP_LOADING':
             return Object.assign({}, state, {
                 isLoading: action.isLoading

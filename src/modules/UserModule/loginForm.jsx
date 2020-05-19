@@ -33,60 +33,60 @@ class LoginForm extends Component {
     getToken() {
         let { dispatch } = this.props
         let { account, pwd } = this.state
-        dispatch(getToken(account,pwd))
+        dispatch(getToken(account, pwd))
     }
 
     render() {
         let { appState } = this.props,
-            { isLoging } = appState
-
+            { isLoging, token } = appState
         return (
-            <div id="Login">
-                <div className="login-form container">
-                    <h3 className="text-center"><b>{'Login'}</b></h3>
-                    <hr />
-                    <div className="text-center" style={{ paddingBottom: 8 }}>
-                        <br />
-                        <br />
-                        <input
-                            disabled={isLoging}
-                            value={this.state.account}
-                            onChange={(e) => {
-                                this.setState({
-                                    account: e.target.value
-                                })
-                            }}
-                            className="form-control"
-                            placeholder={'E-mail or Username'}
-                            type="text" />
-                        <br />
-                        <input
-                            disabled={isLoging}
-                            value={this.state.pwd}
-                            onChange={(e) => {
-                                this.setState({
-                                    pwd: e.target.value
-                                })
-                            }}
-                            className="form-control"
-                            type="password"
-                            placeholder={'Password'} />
-                        <br />
-                        <button
-                            disabled={isLoging}
-                            onClick={this.getToken}
-                            className="btn btn-block btn-primary">{'Login'}</button>
-                        <br />
+            <>
+                {token === '' ? <div id="Login">
+                    <div className="login-form container">
+                        <h3 className="text-center"><b>{'Login'}</b></h3>
+                        <hr />
+                        <div className="text-center" style={{ paddingBottom: 8 }}>
+                            <br />
+                            <br />
+                            <input
+                                disabled={isLoging}
+                                value={this.state.account}
+                                onChange={(e) => {
+                                    this.setState({
+                                        account: e.target.value
+                                    })
+                                }}
+                                className="form-control"
+                                placeholder={'E-mail or Username'}
+                                type="text" />
+                            <br />
+                            <input
+                                disabled={isLoging}
+                                value={this.state.pwd}
+                                onChange={(e) => {
+                                    this.setState({
+                                        pwd: e.target.value
+                                    })
+                                }}
+                                className="form-control"
+                                type="password"
+                                placeholder={'Password'} />
+                            <br />
+                            <button
+                                disabled={isLoging}
+                                onClick={this.getToken}
+                                className="btn btn-block btn-primary">{'Login'}</button>
+                            <br />
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div> : <></>}</>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        appState: state
+        appState: state.MainReducer
     }
 }
 
