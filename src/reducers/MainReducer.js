@@ -1,7 +1,68 @@
-let axios = require('axios');
-axios = axios.create({
-    baseURL: process.env.REACT_APP_API_HOST,
-});
+let Axios = require('axios');
+let {
+    REACT_APP_API_HOST,
+    REACT_APP_USER_AUTH_SERVER: UDIC_SERVICES_SERVER = '',
+    REACT_APP_USER_AUTH = 'FALSE'
+} = process.env
+
+if(REACT_APP_USER_AUTH === 'FALSE'){ //不需要做登入認證
+    axios = Axios.create({
+        baseURL: REACT_APP_API_HOST,
+    });
+}
+else{
+    axios = Axios.create({
+        baseURL: UDIC_SERVICES_SERVER
+    });
+}
+
+export const getToken = (account, password, callbackOnFail = () => { }, callbackOnSuccess = () => { }) => {
+
+    const reCreateAxios = (token) => {
+        if (!token) {
+            token = window.localStorage.getItem('appToken')
+        }
+        axios = Axios.create({
+            headers: { 'AppName': 'Visualize CJ', 'Authorization': token },
+            baseURL:UDIC_SERVICES_SERVER+'/service/' + REACT_APP_API_HOST
+        });
+    }
+    
+    return (dispatch) => {
+        dispatch({
+            type: 'USER_LOGINING',
+            loging: true
+        })
+        axios.post('/login', {
+            account,
+            password
+        })
+            .then((res) => {
+                console.log(res.data)
+                let { Token = '' } = res.data
+                callbackOnSuccess()
+                window.localStorage.setItem('appToken', Token)
+                reCreateAxios(Token) // recreate axios
+
+                dispatch({
+                    type: 'USER_LOGIN',
+                    token: Token
+                })
+                dispatch({
+                    type: 'USER_LOGINING',
+                    loging: false
+                })
+            })
+            .catch((res) => {
+                console.log(res)
+                callbackOnFail()
+                dispatch({
+                    type: 'USER_LOGINING',
+                    loging: false
+                })
+            })
+    }
+}
 
 export function setAppLoading(isLoading) {
     return {
@@ -11,22 +72,6 @@ export function setAppLoading(isLoading) {
 }
 
 export function parseCJ(CJText = '', taskType, FoucsPositions = [], SearchParagraph, Question_A, Question_B) {
-    // if (process.env.NODE_ENV === 'development') {
-    //     return (dispatch) => {
-    //         axios.post('/parse-defendant-example')
-    //             .then((res) => {
-    //                 // console.log(res)
-    //                 let { data = {} } = res,
-    //                     { defendants = [], tokens = [], marks = [] } = data;
-    //                 dispatch({
-    //                     type: 'PARSE_CJ_RESULT',
-    //                     CJDefendants: defendants,
-    //                     CJTokens: tokens,
-    //                     CJMarks: marks
-    //                 })
-    //             })
-    //     }
-    // }
     return (dispatch) => {
         // clear data
         dispatch({

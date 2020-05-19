@@ -3,6 +3,8 @@ import CJInput from './modules/InputModule'
 import VisualizeCJ from './modules/VisualizeModule'
 import LoadingMask from './modules/loadingModule'
 import Footer from './modules/FooterModule'
+import LoginForm from './modules/UserModule/loginForm'
+
 import './App.css'
 class App extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class App extends Component {
           <span className="float-right">UDIC LAB</span>
         </div>
         <div className="container">
+          <LoginForm/>
           <LoadingMask />
           <CJInput />
           <VisualizeCJ />
