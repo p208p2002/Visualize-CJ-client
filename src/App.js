@@ -32,7 +32,7 @@ class App extends Component {
           <LoadingMask />
           <CJInput />
           <VisualizeCJ />
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     );
