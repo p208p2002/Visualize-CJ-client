@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CJInput from './modules/InputModule'
 import VisualizeCJ from './modules/VisualizeModule'
 import LoadingMask from './modules/loadingModule'
-import Footer from './modules/FooterModule'
+// import Footer from './modules/FooterModule'
 import LoginForm from './modules/UserModule/loginForm'
 import './App.css'
 
