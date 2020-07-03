@@ -19,13 +19,13 @@ class App extends Component {
         <div className="vj-title">
           <h1>Visualize CJ</h1>
           {REACT_APP_USER_AUTH === 'TRUE' ?
-            <span className="float-right"><span>UDIC LAB</span> | <span onClick={() => {
+            <span className="float-right"><span>&nbsp;</span> | <span onClick={() => {
               window.localStorage.setItem('appToken', '')
               window.location.href = '/'
             }}
               style={{ cursor: 'pointer' }}
             >登出</span></span> :
-            <span className="float-right"><span>UDIC LAB</span></span>}
+            <span className="float-right"><span>&nbsp;</span></span>}
         </div>
         <div className="container">
           {REACT_APP_USER_AUTH === 'TRUE' ? <LoginForm /> : <></>}
