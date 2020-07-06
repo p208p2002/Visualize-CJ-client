@@ -48,6 +48,11 @@ class index extends Component {
             question_A = '[NAME]擔任什麼職位'
             question_B = '誰擔任[TARGET]'
         }
+        else if (type === 'PARSE_UNIT') {
+            searchParagraph = '事實'
+            question_A = '[NAME]在什麼單位工作'
+            question_B = '誰在[TARGET]工作'
+        }
         else if (type === 'PARSE_BREAK_LAW') {
             searchParagraph = '論罪科刑'
             question_A = '[NAME]觸犯什麼法條'
@@ -99,7 +104,7 @@ class index extends Component {
 
                             }}
                         >輸入範例4</div>
-                         &nbsp;
+                        &nbsp;
                         <div
                             className="btn btn-success"
                             onClick={() => {
@@ -125,7 +130,17 @@ class index extends Component {
                         <li className="nav-item">
                             <span
                                 onClick={() => {
-                                    dispatch(setVisualizeView('PARSE_POSITION')) 
+                                    dispatch(setVisualizeView('PARSE_UNIT'))
+                                    this.setState({
+                                        tab: 'PARSE_UNIT'
+                                    })
+                                }}
+                                className={`nav-link ${tab === 'PARSE_UNIT' ? 'active' : ''}`} >分析單位</span>
+                        </li>
+                        <li className="nav-item">
+                            <span
+                                onClick={() => {
+                                    dispatch(setVisualizeView('PARSE_POSITION'))
                                     this.setState({
                                         tab: 'PARSE_POSITION'
                                     })
@@ -135,7 +150,7 @@ class index extends Component {
                         <li className="nav-item">
                             <span
                                 onClick={() => {
-                                    dispatch(setVisualizeView('PARSE_BREAK_LAW')) 
+                                    dispatch(setVisualizeView('PARSE_BREAK_LAW'))
                                     this.setState({
                                         tab: 'PARSE_BREAK_LAW'
                                     })
@@ -143,12 +158,22 @@ class index extends Component {
                                 className={`nav-link ${tab === 'PARSE_BREAK_LAW' ? 'active' : ''}`} >分析觸犯法條</span>
                         </li>
                     </ul>
-                    <br/>
+                    <br />
+                    {tab === 'PARSE_UNIT' ? <>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.submit('PARSE_UNIT')
+                            }}
+                            className="btn btn-primary">
+                            分析單位
+                                </button>
+                    </> : <></>}
                     {tab === 'PARSE_POSITION' ? <>
                         <button
-                            onClick={(e) => { 
+                            onClick={(e) => {
                                 e.preventDefault();
-                                this.submit('PARSE_POSITION') 
+                                this.submit('PARSE_POSITION')
                             }}
                             className="btn btn-primary">
                             分析職稱
@@ -156,11 +181,11 @@ class index extends Component {
                     </> : <></>}
                     {tab === 'PARSE_BREAK_LAW' ? <>
                         <button
-                            onClick={(e) => { 
-                                e.preventDefault(); 
-                                this.submit('PARSE_BREAK_LAW') }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.submit('PARSE_BREAK_LAW')
+                            }}
                             className="btn btn-primary"
-                        // style={{ marginLeft: 3 }}
                         >
                             分析觸犯法條
                                 </button>

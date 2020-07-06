@@ -215,7 +215,7 @@ class markDocument extends Component {
                                             });
                                         }} style={{cursor:'pointer'}}>回到上方</span>
                                     </div>
-                                    <span className="float-right" style={{ marginRight: 15,marginTop:-24 }}>UDIC LAB</span>
+                                    <span className="float-right" style={{ marginRight: 15,marginTop:-24 }}>{/*UDIC LAB*/}</span>
                                 </div>
                                 <div>
                                     <br />
