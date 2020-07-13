@@ -23,8 +23,16 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
                                 <ul>
                                     {defendant.candicate_positions.map((positions, p_index) => {
                                         return (
-                                            <li key={p_index} style={{ listStyle: 'decimal' }}>
+                                            <li key={p_index} style={{ 
+                                                listStyle: 'decimal',
+                                                fontSize: p_index === 0?18:14,
+                                                fontWeight: p_index === 0?'bold':'normal',
+                                                 }}>
                                                 <button
+                                                    style={{
+                                                        fontSize: p_index === 0?18:14,
+                                                        fontWeight: p_index === 0?'bold':'normal',
+                                                    }}
                                                     className="btn btn-sm position-link"
                                                     onClick={() => {
                                                         self.scrollToRef(`${defendant.name}-${positions[0].substring(0, 1)}`)
