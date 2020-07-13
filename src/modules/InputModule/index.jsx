@@ -49,7 +49,7 @@ class index extends Component {
             question_B = '誰擔任[TARGET]'
         }
         else if (type === 'PARSE_UNIT') {
-            searchParagraph = '事實'
+            searchParagraph = '單位'
             question_A = '[NAME]在什麼單位工作'
             question_B = '誰在[TARGET]工作'
         }
