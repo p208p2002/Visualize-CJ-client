@@ -21,6 +21,9 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
                                 <h5 className="card-title">{defendant.name}(被告)</h5>
                                 <h6>候選身份</h6>
                                 <ul>
+                                    {defendant.candicate_positions.length === 0?
+                                    <p>無分析結果</p>
+                                    :null}
                                     {defendant.candicate_positions.map((positions, p_index) => {
                                         return (
                                             <li key={p_index} style={{ 
