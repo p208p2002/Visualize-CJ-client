@@ -15,9 +15,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <div className="vj-title">
-          <h1>Visualize CJ</h1>
+      <div style={{
+        backgroundColor: '#f3faf4',
+      }}>
+        <div className="vj-title" style={{borderBottom: '3px solid #145950'}}>
+          <h1>AI視覺化判決書分析</h1>
           {REACT_APP_USER_AUTH === 'TRUE' ?
             <span className="float-right"><span>{/* UDIC LAB */}</span> | <span onClick={() => {
               window.localStorage.setItem('appToken', '')

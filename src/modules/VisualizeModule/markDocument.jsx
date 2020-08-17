@@ -14,7 +14,8 @@ const DefendantsCard = ({ self, defendantsWithColor }) => {
                             className="card"
                             style={{
                                 borderColor: `rgb(${defendant.color})`,
-                                borderWidth: 3
+                                borderWidth: 3,
+                                backgroundColor:'rgba(250,250,250)'
                             }}
                         >
                             <div className="card-body">
@@ -201,10 +202,11 @@ class markDocument extends Component {
                             top: 0,
                             left: 0,
                             width: '100%',
-                            backgroundColor: 'white',
+                            // backgroundColor: 'white',
                             height: INFO_BOARD_HEIGHT.toString() + 'px',
                             overflowX: 'hidden',
-                            overflowY: 'visible'
+                            overflowY: 'visible',
+                            backgroundColor:'#f3faf4'
                         }}>
                             <div className="container">
                                 <div className="w-100" style={{

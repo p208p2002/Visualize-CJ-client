@@ -1,4 +1,5 @@
 /* https://coolors.co/ecedf2-363f70-ff6f59-f4b563-fbfcff */
-body {
+html,body {
   font-family: 'Noto Sans TC', sans-serif !important;
+  background-color: #f3faf4;
 }

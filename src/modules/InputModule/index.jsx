@@ -122,7 +122,7 @@ class index extends Component {
                             placeholder="請將判決書貼於此"
                             className="form-control"
                             id="exampleFormControlTextarea1"
-                            style={{ height: '300px', marginTop: 5 }}></textarea>
+                            style={{ height: '300px', marginTop: 5, backgroundColor:'rgb(250,250,250)' }}></textarea>
                     </div>
 
                     {/*  */}
