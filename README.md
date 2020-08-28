@@ -1,4 +1,6 @@
 # V-CJ Client ![Build](https://github.com/p208p2002/Visualize-CJ-client/workflows/Build/badge.svg?branch=master)
+### UI Design
+![ui demo](https://raw.githubusercontent.com/p208p2002/Visualize-CJ-client/master/demo.png)
 ### Setup dot-env
 `$ cp example.env .env`
 ```.env
